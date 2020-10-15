@@ -206,7 +206,8 @@ MCVfold.spls <- function(
             X.test = X[omit, , drop = FALSE]#matrix(X[omit, ], nrow = length(omit)) #removed to keep the colnames in X.test
             
             if(any(class.object == "DA")){
-                Y.train = Y[-omit]
+                browser()
+                Y.train = factor(Y[-omit])
                 Y.train.mat = unmap(Y.train)
                 q = ncol(Y.train.mat)
                 colnames(Y.train.mat) = levels(Y.train)
