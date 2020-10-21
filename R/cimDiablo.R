@@ -173,17 +173,11 @@ cimDiablo = function(object,
     
     keepA = lapply(object$loadings, function(i)
         apply(abs(i), 1, sum) > 0)
-    XDatList = mapply(function(x, y) {
-        x[, y]
-    },
-    x = X,
-    y = keepA[-length(keepA)],
-    SIMPLIFY = FALSE)
+    ind.Y <- which(names(object$variates) == 'Y')
+    XDatList <- mapply(v = object$variates[-ind.Y], l = object$loadings[-ind.Y], FUN = function(v, l) 
+        v[,comp] %*% t(l)[comp,], SIMPLIFY = FALSE)
     XDat = do.call(cbind, XDatList)
-    XDat[which(XDat > 2)] = 2
-    XDat[which(XDat < -2)] = -2
     
-    #dark = brewer.pal(n = 12, name = 'Paired')[seq(2, 12, by = 2)]
     VarLabels = factor(rep(names(X), lapply(keepA[-length(keepA)], sum)),
                        levels = names(X))#[order(names(X))])
     
