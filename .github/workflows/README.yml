@@ -76,6 +76,7 @@ jobs:
           # git add -f README.md
           # # git diff-index --quiet HEAD || echo "$(git diff-index --quiet HEAD)" >> readmes/diff.md
           # git diff-index --quiet HEAD || git commit -am "automatic update of README.md - skip-ci"
+          git push origin HEAD:test --force
           git push bioc HEAD:RELEASE_3_8
 
       - name: Upload README files ⬆️
