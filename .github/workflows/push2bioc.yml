@@ -28,14 +28,22 @@ jobs:
           git config user.name 'Al J Abadi'
           git config user.email 'al.jal.abadi@gmail.com'
           git remote add bioc git@git.bioconductor.org:packages/mixOmics.git
+
+          git checkout -b current_branch
+
+          git checkout -b bioc_master
           echo "\$git fetch bioc master" &>> log/log.txt
           git fetch bioc master &>> log/log.txt
-          git checkout -b current_branch
-          echo "\$git log -n 5" &>> log/log.txt
-          git log -n 5 &>> log/log.txt
           echo "\$git reset --hard bioc/master" &>> log/log.txt
           git reset --hard bioc/master &>> log/log.txt
-          git push bioc current_branch:master  &>> log/log.txt
+
+          git checkout current_branch
+          git reset --hard origin/master &>> log/log.txt
+
+          echo "\$git log bioc_master..current_branch --pretty=format:\"%s\"" &>> log/log.txt
+          git log bioc_master..current_branch --pretty=format:"%s" &>> log/log.txt
+          
+          #git push bioc current_branch:master  &>> log/log.txt
         env:
           SSH_KEY: ${{ secrets.PRIVATE_SSH_KEY_AL }}
           BIOC_HOST: ${{ secrets.BIOC_HOST }}
