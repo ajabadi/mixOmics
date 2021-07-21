@@ -35,7 +35,7 @@ jobs:
           git log -n 5 &>> log/log.txt
           echo "\$git reset --hard bioc/master" &>> log/log.txt
           git reset --hard bioc/master &>> log/log.txt
-          # git push bioc current_branch:master  &>> log/log.txt
+          git push bioc current_branch:master  &>> log/log.txt
         env:
           SSH_KEY: ${{ secrets.PRIVATE_SSH_KEY_AL }}
           BIOC_HOST: ${{ secrets.BIOC_HOST }}
