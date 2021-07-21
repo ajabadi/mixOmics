@@ -30,8 +30,10 @@ jobs:
           git remote add bioc git@git.bioconductor.org:packages/mixOmics.git
           echo "git fetch bioc master"
           git fetch bioc master &>> log/log.txt
-          git checkout -b current_branch
-          git push bioc current_branch:master  &>> log/log.txt
+          echo "git pull bioc master"
+          git pull bioc master &>> log/log.txt
+          # git checkout -b current_branch
+          # git push bioc current_branch:master  &>> log/log.txt
         env:
           SSH_KEY: ${{ secrets.PRIVATE_SSH_KEY_AL }}
           BIOC_HOST: ${{ secrets.BIOC_HOST }}
