@@ -39,9 +39,8 @@ jobs:
           git reset --hard bioc/master &>> log/log.txt
 
           git checkout current_branch
-          git reset --hard origin/master &>> log/log.txt
 
-          echo "\$git log bioc_master..current_branch --pretty=format:\"%s\"" &>> log/log.txt
+          echo "\$git log biocmaster..current_branch --pretty=format:\"%s\"" &>> log/log.txt
           git log biocmaster..current_branch --pretty=format:"%s" &>> log/log.txt
 
           #git push bioc current_branch:master  &>> log/log.txt
