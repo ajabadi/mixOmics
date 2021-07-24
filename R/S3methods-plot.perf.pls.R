@@ -60,8 +60,18 @@ plot.perf.pls.mthd <-
               ...
     )
     {
-        ## fix check issues
-        comp <- lower <- upper <- NULL
+        ## to avoid NSE undefined variable warnings
+        #' @importFrom utils globalVariables
+        utils::globalVariables(
+            c(
+                "comp",
+                "lower",
+                "upper",
+                "mean",
+                "sd",
+                "feature"
+            )
+        )
         if (length(criterion) > 1 || !(criterion %in% names(x$measures) ))
             stop("'criterion' must be one of names(", 
                  deparse(substitute(x)),"$measures): ", "\n", 

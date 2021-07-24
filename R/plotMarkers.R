@@ -80,7 +80,14 @@ plotMarkers <-
         df$sign <- factor(df$sign, levels = c('Positive Loading', 'Negative Loading'), ordered = TRUE)
         if (global == TRUE)
         {
-            feature <- value <- NULL
+            ## to avoid NSE undefined variable warnings
+            #' @importFrom utils globalVariables
+            utils::globalVariables(
+                c(
+                    "feature",
+                    "value"
+                )
+            )
             #' @importFrom dplyr group_by summarise
             df <- group_by(.data = df, feature, group, sign)
             df <- summarise(.data = df, value = median(value, na.rm = TRUE))

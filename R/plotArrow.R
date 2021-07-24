@@ -245,7 +245,17 @@ plotArrow <- function(object,
             cols <- c('x_centroid', 'y_centroid', paste0(c('x_', 'y_'), block), 'group')
             df <- variates[,cols]
             colnames(df) <- c('xs', 'ys', 'xe', 'ye', 'group')
-            xs <- ys <- xe <- ye <- NULL ## avoid check warnings
+            ## to avoid NSE undefined variable warnings
+            #' @importFrom utils globalVariables
+            utils::globalVariables(
+                c(
+                    "xs",
+                    "ys",
+                    "xe",
+                    "ye"
+                )
+            )
+            
             p <- p + geom_segment(data = df,
                                   aes(
                                       x = xs + (xe - xs) * arrow.offset,

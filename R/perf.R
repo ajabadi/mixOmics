@@ -275,9 +275,22 @@ perf.mixo_pls <- function(object,
     measures <- Reduce(rbind, measures)
     measures <- as.data.frame(measures)
     
-    ## R CMD check stuff
-    measure <- feature <- comp <- block <- stability <- value <- NULL
-    lower <- upper <- keepX <- keepY <- NULL
+    ## to avoid NSE undefined variable warnings
+    #' @importFrom utils globalVariables
+    utils::globalVariables(
+        c(
+            "measure",
+            "feature",
+            "comp",
+            "block",
+            "stability",
+            "value",
+            "lower",
+            "upper",
+            "keepX",
+            "keepY",
+        )
+    )
     
     measure.names <- .name_list(unique(measures$measure))
     measures <- lapply(measure.names, function(meas) {

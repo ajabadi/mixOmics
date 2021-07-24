@@ -82,8 +82,13 @@ plot.tune.spls <-
         
         col.low.sd <- .change_if_null(arg = list(...)$col.low.sd, default = 'blue')
         col.high.sd <- .change_if_null(arg = list(...)$col.high.sd, default = 'red')
-        ## R CMD check
-        keepX <- keepY <- NULL
+        ## to avoid NSE undefined variable warnings
+        #' @importFrom utils globalVariables
+        utils::globalVariables(
+            c(
+                "keepX",
+                "keepY"
+            ))
         ggplot_pls2 <- function(df, col.low.sd, col.high.sd, title = NULL) {
             
             p <- ggplot(df, aes(factor(keepX), factor(keepY))) + 
@@ -123,9 +128,15 @@ plot.tune.spls <-
                                 cex) ## which keepA is not fixed?
             {
             # TODO do we need this one now that we have plot.tune.spls1? Is it used?
-            ## fix check issues
-            comp <- lower <- upper <- NULL
-            
+            ## to avoid NSE undefined variable warnings
+            #' @importFrom utils globalVariables
+            utils::globalVariables(
+                c(
+                    "comp",
+                    "lower",
+                    "upper"
+                )
+            )
             # if sd is NULL & sd values are present, set it to TRUE
             sd <- .change_if_null(sd, default = !any(is.na(df$sd)))
             sd <- .check_logical(sd)
