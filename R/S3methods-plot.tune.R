@@ -88,7 +88,7 @@ plot.tune.spls <-
             c(
                 "keepX",
                 "keepY"
-            ))
+            ), package="mixOmics", add=FALSE)
         ggplot_pls2 <- function(df, col.low.sd, col.high.sd, title = NULL) {
             
             p <- ggplot(df, aes(factor(keepX), factor(keepY))) + 
@@ -135,7 +135,7 @@ plot.tune.spls <-
                     "comp",
                     "lower",
                     "upper"
-                )
+                ), package="mixOmics", add=FALSE
             )
             # if sd is NULL & sd values are present, set it to TRUE
             sd <- .change_if_null(sd, default = !any(is.na(df$sd)))

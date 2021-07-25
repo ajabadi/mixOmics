@@ -253,7 +253,7 @@ plotArrow <- function(object,
                     "ys",
                     "xe",
                     "ye"
-                )
+                ), package="mixOmics", add=FALSE
             )
             
             p <- p + geom_segment(data = df,

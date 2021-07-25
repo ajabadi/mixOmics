@@ -70,7 +70,7 @@ plot.perf.pls.mthd <-
                 "mean",
                 "sd",
                 "feature"
-            )
+            ), package="mixOmics", add=FALSE
         )
         if (length(criterion) > 1 || !(criterion %in% names(x$measures) ))
             stop("'criterion' must be one of names(", 

@@ -289,7 +289,7 @@ perf.mixo_pls <- function(object,
             "upper",
             "keepX",
             "keepY",
-        )
+        ), package="mixOmics", add=FALSE
     )
     
     measure.names <- .name_list(unique(measures$measure))

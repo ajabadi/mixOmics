@@ -86,7 +86,7 @@ plotMarkers <-
                 c(
                     "feature",
                     "value"
-                )
+                ), package="mixOmics", add=FALSE
             )
             #' @importFrom dplyr group_by summarise
             df <- group_by(.data = df, feature, group, sign)
