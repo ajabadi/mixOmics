@@ -35,6 +35,8 @@ cim(
   mapping = "XY",
   legend = NULL,
   save = NULL,
+  save.width = 12,
+  save.height = 12,
   name.save = NULL
 )
 }
@@ -130,6 +132,8 @@ title of the legend and cex.}
 
 \item{save}{should the plot be saved? If so, argument to be set to either
 \code{'jpeg'}, \code{'tiff'}, \code{'png'} or \code{'pdf'}.}
+
+\item{save.width, save.height}{Numeric. Plot dimensions in inches.}
 
 \item{name.save}{character string for the name of the file to be saved.}
 }

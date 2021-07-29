@@ -125,6 +125,7 @@
 #' @param save should the plot be saved? If so, argument to be set to either
 #' \code{'jpeg'}, \code{'tiff'}, \code{'png'} or \code{'pdf'}.
 #' @param name.save character string for the name of the file to be saved.
+#' @param save.width,save.height Numeric. Plot dimensions in inches.
 #' @return A list containing the following components: \item{M}{the mapped
 #' matrix used by \code{cim}.} \item{rowInd, colInd}{row and column index
 #' permutation vectors as returned by \code{\link{order.dendrogram}}.}
@@ -198,6 +199,8 @@ cim <-
              mapping = "XY",
              legend = NULL,
              save = NULL,
+             save.width = 12,
+             save.height = 12,
              name.save = NULL)
 
     {
@@ -438,25 +441,30 @@ cim <-
                 jpeg(
                     filename = paste0(name.save, ".jpeg"),
                     res = 600,
-                    width = 4000,
-                    height = 4000
+                    width = ifelse(save.width > 100, save.width/300, save.width) ,
+                    height = ifelse(save.height > 100, save.height/300, save.height) ,
+                    units = "in"
                 )
             if (save == "png")
                 jpeg(
                     filename = paste0(name.save, ".png"),
                     res = 600,
-                    width = 4000,
-                    height = 4000
+                    width = ifelse(save.width > 100, save.width/300, save.width) ,
+                    height = ifelse(save.height > 100, save.height/300, save.height) ,
+                    units = "in"
                 )
             if (save == "tiff")
                 tiff(
                     filename = paste0(name.save, ".tiff"),
                     res = 600,
-                    width = 4000,
-                    height = 4000
+                    width = ifelse(save.width > 100, save.width/300, save.width) ,
+                    height = ifelse(save.height > 100, save.height/300, save.height) ,
+                    units = "in"
                 )
             if (save == "pdf")
-                pdf(file = paste0(name.save, ".pdf"))
+                pdf(file = paste0(name.save, ".pdf"), 
+                    width = save.width, 
+                    height = save.height)
             
         }
         
@@ -1635,13 +1643,15 @@ cim <-
                 lwid = lwid
             )
         }, error = function(e)
-            e)
+            list(message = e , callstack = traceback()))
         
-        if (is(try_plot, "error")) {
+        if (is(try_plot$message, "error")) {
             message(sprintf(
-                "Error in cim plot: %s. See ?cim for help.",
+                "Error in cim plot: %s. See ?cim for help.\n",
                 try_plot$message
-            ))
+            )
+           )
+            traceback()
         } else {
             #-- add to plot  -------------------------------------
             if (!is.null(legend))
@@ -1752,12 +1762,11 @@ cim <-
                      object.pca) &
                 mapping == "XY")
                 res$mat.cor = object
-            par(opar)
             
             if (!is.null(save))
                 dev.off()
         }
         
-        
+        par(opar)
         return(invisible(res))
     }
