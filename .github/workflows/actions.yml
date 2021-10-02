@@ -70,6 +70,12 @@ jobs:
           docker_tag="github"
           [[ $BRANCH_NAME =~ "release_" ]] && docker_tag=$BRANCH_NAME
           echo ::set-output name=docker_tag::$docker_tag
+      - name: Upload log ⬆
+        if: always()
+        uses: actions/upload-artifact@master
+        with:
+          name:  needslog
+          path: gatekeeperlogs
 
   R-CMD-check:
     needs: [gatekeeper, versions]
@@ -97,6 +103,8 @@ jobs:
     steps:
       - name: write
         run: |
+          mkdir check
+          touch check/log
           echo ${{ needs.versions.outputs.r }} >> check/log
           echo ${{ needs.versions.outputs.bioc }} >> check/log
 
