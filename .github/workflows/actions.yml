@@ -44,9 +44,8 @@ jobs:
           Rscript -e "install.packages('BiocManager', Ncpus=2)"
           r_devel=$(Rscript -e "vm=BiocManager:::.version_map(); as.character(vm[vm\$BiocStatus == 'devel',]\$R)")
           r_release=$(Rscript -e "vm=BiocManager:::.version_map(); as.character(vm[vm\$BiocStatus == 'release',]\$R)")
-          echo r_devel >> check/log
-          echo "\n" >> check/log
-          echo r_release >> check/log
+          echo $r_devel >> check/log
+          echo $r_release >> check/log
           if [[ $BRANCH_NAME =~ "release_" ]];
           then
             echo "BRANCH NOT REALSE\n "e >> check/log
@@ -80,7 +79,7 @@ jobs:
   R-CMD-check:
     needs: [gatekeeper, versions]
     ## run scheduled jobs only on main repo - do not run a duplicate job for merges etc. Do not run if commit messages include any of 'worksave' or 'skip-ci'
-    if: (github.event_name == 'schedule' && github.repository == 'mixOmicsTeam/mixOmics') || (github.event_name != 'schedule' && (needs.gatekeeper.outputs.should_skip == 'false') && !contains(github.event.head_commit.message, 'worksave') && !contains(github.event.head_commit.message, 'skip-ci'))
+    # if: (github.event_name == 'schedule' && github.repository == 'mixOmicsTeam/mixOmics') || (github.event_name != 'schedule' && (needs.gatekeeper.outputs.should_skip == 'false') && !contains(github.event.head_commit.message, 'worksave') && !contains(github.event.head_commit.message, 'skip-ci'))
     runs-on: ${{ matrix.config.os }}
     container: ${{ matrix.config.image }}
 
@@ -112,5 +111,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@master
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: checks
           path: check
