@@ -46,17 +46,20 @@ jobs:
           r_release=$(Rscript -e "vm=BiocManager:::.version_map(); cat(as.character(vm[vm\$BiocStatus == 'release',]\$R))")
           echo $r_devel >> check/log
           echo $r_release >> check/log
-          if [[ $BRANCH_NAME =~ "release_" ]];
+          if [[ $BRANCH_NAME =~ "release_" ]]
           then
-            echo "BRANCH NOT REALSE\n "e >> check/log
+            echo "BRANCH NOT REALSE" >> check/log
             bioc="latest"
             r="$r_release"
-            echo "r\n" >> check/log
-            echo "bioc\n" >> check/log
           else
+            echo "BRANCH REALSE: $BRANCH_NAME" >> check/log
             bioc="devel"
             r="$r_devel"
           fi
+          
+          echo "bioc: $bioc" >> check/log
+          echo "r: $r" >> check/log
+          echo "================" >> check/log
           echo ::set-output name=r::$r
           echo ::set-output name=bioc::$bioc
 
