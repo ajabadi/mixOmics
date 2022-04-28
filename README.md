@@ -3,8 +3,8 @@
 
 [![R build
 status](https://github.com/mixOmicsteam/mixOmics/workflows/R-CMD-check/badge.svg)](https://github.com/mixOmicsteam/mixOmics/actions)
-[![](https://img.shields.io/badge/bioc%20release-6.16.1-green.svg)](https://www.bioconductor.org/packages/mixOmics)
-[![](https://codecov.io/gh/mixOmicsTeam/mixOmics/branch/master/graph/badge.svg)](https://codecov.io/gh/mixOmicsTeam/mixOmics)
+[![](https://img.shields.io/badge/bioc%20release-6.20.0-green.svg)](https://www.bioconductor.org/packages/mixOmics)
+[![](https://app.codecov.io/gh/mixOmicsTeam/mixOmics/branch/master/graph/badge.svg)](https://app.codecov.io/gh/mixOmicsTeam/mixOmics)
 [![download](http://www.bioconductor.org/shields/downloads/release/mixOmics.svg)](https://bioconductor.org/packages/stats/bioc/mixOmics)
 [![](https://img.shields.io/github/last-commit/mixOmicsTeam/mixOmics.svg)](https://github.com/mixOmicsTeam/mixOmics/commits/master)
 [![license](https://img.shields.io/badge/license-GPL%20\(%3E=%202\)-lightgrey.svg)](https://choosealicense.com/)
@@ -106,10 +106,11 @@ older version of Docker from the following link:
 Then open your system’s command line interface (e.g. Terminal for MacOS
 and Command Promot for Windows) for the following steps.
 
-2)  Pull mixOmics container
 **MacOS users only:** you will need to launch Docker Desktop to activate
 your root privileges before running any docker commands from the command
 line.
+
+2)  Pull mixOmics container
 
 <!-- end list -->
 
